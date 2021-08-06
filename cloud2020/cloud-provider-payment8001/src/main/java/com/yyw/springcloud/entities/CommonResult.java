@@ -21,5 +21,6 @@ public class CommonResult<T>{
 
     public  CommonResult(Integer code,String message){
         this(code,message,null);
+
     }
 }
