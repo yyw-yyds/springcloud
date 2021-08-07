@@ -13,5 +13,6 @@ import org.apache.ibatis.annotations.Param;
 public interface PaymentDao {
 
     public int creat(Payment payment);
+
     public Payment getPaymentById(@Param("id") Long id);
 }
