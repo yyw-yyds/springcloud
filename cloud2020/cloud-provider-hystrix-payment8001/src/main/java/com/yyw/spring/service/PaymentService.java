@@ -1,6 +1,7 @@
 package com.yyw.spring.service;
 
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.stereotype.Service;
 
 import java.util.concurrent.TimeUnit;
@@ -14,9 +15,10 @@ public class PaymentService {
     }
 
 
+    @HystrixCommand(fallbackMethod = "paymentInfo_TimeOutHandler")
     public String paymentInfo_TimeOut(Integer id){
 
-        int timeNumber = 3;
+        int timeNumber = 5;
         try {
             TimeUnit.SECONDS.sleep(timeNumber);
         } catch (InterruptedException e) {
@@ -26,4 +28,10 @@ public class PaymentService {
         return "线程池：  "+Thread.currentThread().getName()+"paymentInfo_TimeOut ,id: " +id+"\t"+"哈哈哈" +" 耗时(秒):" +timeNumber;
     }
 
-}
+    public String paymentInfo_TimeOutHandler(Integer id){
+        return "线程池：  "+Thread.currentThread().getName()+"paymentInfo_TimeOutHandler ,id: " +id+"\t"+"哭了" ;
+
+    }
+
+
+    }
